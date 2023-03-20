@@ -15,10 +15,10 @@ except:
 def load_dataset() -> prior.DatasetDict:
     """Load the houses dataset."""
     data = {}
-    for split, size in [("train", 1000), ("val", 100)]:
+    for split, size in [("train", 500), ("val", 100)]:
         with gzip.open(f"{split}.jsonl.gz", "r") as f:
             houses = [line for line in tqdm(f, total=size, desc=f"Loading {split}")]
         data[split] = NoCacheLazyJsonDataset(
-            data=houses, dataset="attr-onav-1k", split=split
+            data=houses, dataset="attr-onav-one-room", split=split
         )
     return prior.DatasetDict(**data)
